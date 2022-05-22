@@ -1,0 +1,40 @@
+input_size: 384
+backbone: 'resnet'
+num_epochs: 18
+seed: 42
+device: 'cuda'
+save_dir: 'output/duts'
+infer_save_dir: 'infer/DUTS-TE'
+infer_checkpoint: ''
+clip: '0.5'
+
+Optimizer:
+  type: 'Adam'
+  args:
+    lr: 0.0001
+    weight_decay: 0.000001
+
+Scheduler:
+  type: MultiStepLR
+  args:
+    milestones: [9, 11]
+
+TrainReader:
+  batch_size: 24  # 24
+  num_workers: 4
+  root_dir: 'data/DUTS-TE'
+  file_path: 'data/DUTS-TE/train.txt'
+
+TestReader:
+  batch_size: 1
+  num_workers: 4
+  root_dir: 'data/DUTS-TE'
+  file_path: 'data/DUTS-TE/test.txt'
+  # root_dir: 'data/DUT-OMROM'
+  # file_path: 'data/DUT-OMROM/test.txt'
+  # root_dir: 'data/ECSSD'
+  # file_path: 'data/ECSSD/test.txt'
+  # root_dir: 'data/HKU-IS'
+  # file_path: 'data/HKU-IS/test.txt'
+  # root_dir: 'data/PASCAL-S'
+  # file_path: 'data/PASCAL-S/test.txt'

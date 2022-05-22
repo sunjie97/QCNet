@@ -1,0 +1,34 @@
+input_size: 512
+backbone: 'resnet'
+num_epochs: 80
+seed: 42
+device: 'cuda'
+save_dir: 'output/composite'
+infer_save_dir: 'infer/Composite'
+infer_checkpoint: ''
+clip: '0.6'
+
+Optimizer:
+  type: 'Adam'
+  args:
+    lr: 0.0001
+    weight_decay: 0.000001
+
+Scheduler:
+  type: CosineAnnealingWarmRestarts
+  args:
+    T_0: 500
+    T_mult: 1
+    eta_min: 0.000001
+
+TrainReader:
+  batch_size: 12  # 16
+  num_workers: 4
+  root_dir: 'data/Composite'
+  file_path: 'data/Composite/train.txt'
+
+TestReader:
+  batch_size: 1
+  num_workers: 4
+  root_dir: 'data/Composite'
+  file_path: 'data/Composite/test.txt'
